@@ -9,7 +9,6 @@ if (os_type == os_windows) {
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
 } else if (os_type == os_linux) {
-  zip_unzip(working_directory + "gdfiledialogs.elf.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs.elf\"");
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
@@ -51,3 +50,4 @@ function GdCallback(DialogId) {
   FreeExecutedProcessStandardOutput(global.gdpid);
   return str;
 }
+
