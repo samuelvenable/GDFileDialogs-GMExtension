@@ -11,7 +11,7 @@ if (os_type == os_macosx) {
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
 }
-global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\"" : ".elf\""));
+global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\" 2> /dev/null" : ".elf\" 2> /dev/null"));
 function GdOpenFile(Filter, Title) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-file \"" + Filter + "\" \"" + Title + "\"");
   return global.gdpid;
@@ -38,8 +38,8 @@ function GdIsDone(DialogId) {
 function GdCallback(DialogId) {
   var str = "";
   var arr = string_split(string_replace_all(ExecutedProcessReadFromStandardOutput(DialogId), "\r", ""), "\n", false);
-  if (array_length(arr) >= 7) 
-    array_delete(arr, 0, 7);
+  if (array_length(arr) >= (os_type == os_windows) ? 7 : 3) 
+    array_delete(arr, 0, (os_type == os_windows) ? 7 : 3);
   if (array_length(arr) >= 2) 
     array_delete(arr, array_length(arr) - 1, 1);
   for (var i = 0; i < array_length(arr); i++) 
@@ -48,4 +48,3 @@ function GdCallback(DialogId) {
   FreeExecutedProcessStandardOutput(global.gdpid);
   return str;
 }
-
