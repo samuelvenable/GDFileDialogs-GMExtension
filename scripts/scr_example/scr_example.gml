@@ -1,4 +1,7 @@
-if (os_type == os_macosx) {
+if (os_type == os_windows) {
+  zip_unzip(working_directory + "gdfiledialogs.exe.zip", working_directory);
+} else if (os_type == os_macosx) {
+  zip_unzip(working_directory + "gdfiledialogs.app.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs\"");
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
@@ -6,6 +9,7 @@ if (os_type == os_macosx) {
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
 } else if (os_type == os_linux) {
+  zip_unzip(working_directory + "gdfiledialogs.elf.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs.elf\"");
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
