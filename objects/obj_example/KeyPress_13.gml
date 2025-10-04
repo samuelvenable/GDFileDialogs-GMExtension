@@ -1,0 +1,5 @@
+if (dlg == 0) dlg_id = GdOpenFile("*.png;PNG Images|*.bmp;BMP Images|*.gif;GIF Images|*.jpeg,*.jpg;JPEG Images", "Open File")
+else if (dlg == 1) dlg_id = GdOpenFiles("*.png;PNG Images|*.bmp;BMP Images|*.gif;GIF Images|*.jpeg,*.jpg;JPEG Images", "Open Files")
+else if (dlg == 2) dlg_id = GdSaveFile("*.png;PNG Images|*.bmp;BMP Images|*.gif;GIF Images|*.jpeg,*.jpg;JPEG Images", "Save File")
+else if (dlg == 3) dlg_id = GdOpenDir("Open Directory")
+else if (dlg == 4) dlg_id = GdOpenAny("*.png;PNG Images|*.bmp;BMP Images|*.gif;GIF Images|*.jpeg,*.jpg;JPEG Images", "Open File or Directory")
