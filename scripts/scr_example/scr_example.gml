@@ -1,6 +1,4 @@
-if (os_type == os_windows) {
-  zip_unzip(working_directory + "gdfiledialogs.exe.zip", working_directory);
-} else if (os_type == os_macosx) {
+if (os_type == os_macosx) {
   zip_unzip(working_directory + "gdfiledialogs.app.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs\"");
   FreeExecutedProcessStandardInput(global.gdpid);
@@ -13,7 +11,7 @@ if (os_type == os_windows) {
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
 }
-global.gdexe = ((os_type == os_windows) ? "cmd /c " : "") + ("\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\" 2> NUL" : ((os_type == os_macosx) ? "\" 2> /dev/null" : ".elf\" 2> /dev/null")));
+global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\"" : ".elf\""));
 function GdOpenFile(Filter, Title) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-file \"" + Filter + "\" \"" + Title + "\"");
   return global.gdpid;
@@ -40,8 +38,8 @@ function GdIsDone(DialogId) {
 function GdCallback(DialogId) {
   var str = "";
   var arr = string_split(string_replace_all(ExecutedProcessReadFromStandardOutput(DialogId), "\r", ""), "\n", false);
-  if (array_length(arr) >= 3) 
-    array_delete(arr, 0, 3);
+  if (array_length(arr) >= 7) 
+    array_delete(arr, 0, 7);
   if (array_length(arr) >= 2) 
     array_delete(arr, array_length(arr) - 1, 1);
   for (var i = 0; i < array_length(arr); i++) 
