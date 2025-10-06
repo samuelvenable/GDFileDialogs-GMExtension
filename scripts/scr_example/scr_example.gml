@@ -24,7 +24,7 @@ function GdSaveFile(Filter, Title = "", Width = display_get_width() * 0.5, Heigh
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --save-file \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenDir(Title = "", Width = 800, Height = 800) {
+function GdOpenDir(Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-dir \"\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
