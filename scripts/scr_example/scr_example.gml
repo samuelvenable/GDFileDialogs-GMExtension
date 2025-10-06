@@ -12,23 +12,23 @@ if (os_type == os_macosx) {
   FreeExecutedProcessStandardOutput(global.gdpid);
 }
 global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\" 2> /dev/null" : ".elf\" 2> /dev/null"));
-function GdOpenFile(Filter, Title, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+function GdOpenFile(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-file \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenFiles(Filter, Title, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+function GdOpenFiles(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-files \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdSaveFile(Filter, Title, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+function GdSaveFile(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --save-file \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenDir(Title, Width = 800, Height = 800) {
+function GdOpenDir(Title = "", Width = 800, Height = 800) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-dir \"\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenAny(Filter, Title, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+function GdOpenAny(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-any \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
