@@ -1,11 +1,11 @@
 function GenerateWorkingDirectory() {
   // GenerateWorkingDirectory() - Call this Function at Game Start
-  // Sets directory_get_current_working() to Ubuntu (Linux) Assets SubFolder
-  // Sets directory_get_current_working() to Mac App Bundle Resources Folder
-  if (os_type == os_linux)  { return DirectorySetCurrentWorking(directory_get_current_working() + "/assets/"); }
+  // Sets DirectoryGetCurrentWorking() to Ubuntu (Linux) Assets SubFolder
+  // Sets DirectoryGetCurrentWorking() to Mac App Bundle Resources Folder
+  if (os_type == os_linux)  { return DirectorySetCurrentWorking(DirectoryGetCurrentWorking() + "/assets/"); }
   if (os_type != os_macosx) { return true; }
   success = false; 
-  exe_pname = executable_get_directory();          // = "/Path/To/YourAppBundle.app/Contents/MacOS/";
+  exe_pname = ExecutableFromSelf();;          // = "/Path/To/YourAppBundle.app/Contents/MacOS/";
   macos_dname = filename_dir(exe_pname);           // = "/Path/To/YourAppBundle.app/Contents/MacOS";
   macos_bname = filename_name(macos_dname);        // = "MacOS";
   contents_dname = filename_dir(macos_dname);      // = "/Path/To/YourAppBundle.app/Contents";
