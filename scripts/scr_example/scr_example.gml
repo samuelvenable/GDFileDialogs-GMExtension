@@ -1,4 +1,5 @@
 if (os_type == os_macosx) {
+  DirectorySetCurrentWorking(working_directory);
   zip_unzip(working_directory + "gdfiledialogs.app.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs\"");
   FreeExecutedProcessStandardInput(global.gdpid);
@@ -12,24 +13,24 @@ if (os_type == os_macosx) {
   FreeExecutedProcessStandardOutput(global.gdpid);
 }
 global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\" 2> /dev/null" : ".elf\" 2> /dev/null"));
-function GdOpenFile(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
-  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-file \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
+function GdOpenFile(Filter, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-file \"" + string(Filter) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenFiles(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
-  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-files \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
+function GdOpenFiles(Filter, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-files \"" + string(Filter) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdSaveFile(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
-  global.gdpid = ProcessExecuteAsync(global.gdexe + " --save-file \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
+function GdSaveFile(Filter, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+  global.gdpid = ProcessExecuteAsync(global.gdexe + " --save-file \"" + string(Filter) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenDir(Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
-  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-dir \"\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
+function GdOpenDir(Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-dir " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
-function GdOpenAny(Filter, Title = "", Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
-  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-any \"" + string(Filter) + "\" \"" + string(Title) + "\" " + string(Width) + " " + string(Height));
+function GdOpenAny(Filter, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
+  global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-any \"" + string(Filter) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
 }
 function GdIsDone(DialogId) {
