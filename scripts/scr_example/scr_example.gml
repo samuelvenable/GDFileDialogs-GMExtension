@@ -1,4 +1,30 @@
-DirectorySetCurrentWorking(working_directory);
+function GenerateWorkingDirectory() {
+  // GenerateWorkingDirectory() - Call this Function at Game Start
+  // Sets directory_get_current_working() to Ubuntu (Linux) Assets SubFolder
+  // Sets directory_get_current_working() to Mac App Bundle Resources Folder
+  if (os_type == os_linux)  { return DirectorySetCurrentWorking(directory_get_current_working() + "/assets/"); }
+  if (os_type != os_macosx) { return true; }
+  success = false; 
+  exe_pname = executable_get_directory();          // = "/Path/To/YourAppBundle.app/Contents/MacOS/";
+  macos_dname = filename_dir(exe_pname);           // = "/Path/To/YourAppBundle.app/Contents/MacOS";
+  macos_bname = filename_name(macos_dname);        // = "MacOS";
+  contents_dname = filename_dir(macos_dname);      // = "/Path/To/YourAppBundle.app/Contents";
+  contents_bname = filename_name(contents_dname);  // = "Contents";
+  app_dname = filename_dir(contents_dname);        // = "/Path/To/YourAppBundle.app";
+  app_ename = filename_ext(app_dname);             // = ".app";
+  contents_pname = filename_path(macos_dname);     // = "/Path/To/YourAppBundle.app/Contents/";
+  resources_pname = contents_pname + "Resources/"; // = "/Path/To/YourAppBundle.app/Contents/Resources/";
+  // if running from the IDE change working directory to:
+  if (directory_exists(filename_path(parameter_string(1)))) {
+    success = DirectorySetCurrentWorking(filename_path(parameter_string(1)));
+  } // if "/Path/To/YourAppBundle.app/Contents/MacOS/YourExe" and "/Path/To/YourAppBundle.app/Contents/Resources/" exists
+  else if (macos_bname == "MacOS" && contents_bname == "Contents" && app_ename == ".app" && directory_exists(resources_pname)) {
+    // set working directory to "/Path/To/YourAppBundle.app/Contents/Resources/" and allow loading normal included files
+    success = DirectorySetCurrentWorking(resources_pname);
+  }
+  return success;
+}
+GenerateWorkingDirectory();
 if (os_type == os_macosx) {
   zip_unzip(working_directory + "gdfiledialogs.app.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs\"");
