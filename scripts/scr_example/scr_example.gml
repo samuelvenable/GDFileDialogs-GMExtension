@@ -1,5 +1,5 @@
+DirectorySetCurrentWorking(working_directory);
 if (os_type == os_macosx) {
-  DirectorySetCurrentWorking(working_directory);
   zip_unzip(working_directory + "gdfiledialogs.app.zip", working_directory);
   global.gdpid = ProcessExecute("chmod +x \"" + working_directory + "gdfiledialogs\"");
   FreeExecutedProcessStandardInput(global.gdpid);
