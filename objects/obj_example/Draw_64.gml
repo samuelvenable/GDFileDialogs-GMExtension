@@ -1,5 +1,5 @@
 display_set_gui_size(window_get_width(), window_get_height());
-surface_resize(application_surface, window_get_width(), window_get_height());
+surface_resize(application_surface, window_get_width() > 0 ? window_get_width() : 1, window_get_height() > 0 ? window_get_height() : 1);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_set_font(fnt_example);
