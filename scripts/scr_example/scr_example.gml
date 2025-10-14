@@ -63,14 +63,29 @@ function GdIsDone(DialogId) {
   return CompletionStatusFromExecutedProcess(DialogId);
 }
 function GdCallback(DialogId) {
-  var str = "";
-  var arr = string_split(string_replace_all(ExecutedProcessReadFromStandardOutput(DialogId), "\r", ""), "\n", false);
-  if (array_length(arr) >= (os_type == os_windows) ? 7 : 3) 
-    array_delete(arr, 0, (os_type == os_windows) ? 7 : 3);
-  if (array_length(arr) >= 2) 
-    array_delete(arr, array_length(arr) - 1, 1);
-  for (var i = 0; i < array_length(arr); i++) 
-    str += arr[i] + ((i < array_length(arr) - 1) ? "\n" : "");
+  str = "";
+  if (os_type == os_windows) {
+    var username = environment_get_variable("USERNAME")
+    temp_path = "C:/Users/" + username + "/AppData/Local/Temp/"
+  } else {
+    temp_path = "/tmp/"
+  }
+  if (file_exists(temp_path + "gdfiledialogs.txt")) {
+    var fd = file_text_open_read(temp_path + "gdfiledialogs.txt");
+    if (fd != -1) {
+      while (!file_text_eof(fd)) {
+        str += file_text_read_string(fd) + "\n";
+		file_text_readln(fd);
+	  }
+	  file_text_close(fd);
+    }
+    file_delete(temp_path + "gdfiledialogs.txt");
+    if (string_length(str) > 0) {
+      if (string_copy(str, string_length(str) - 1, 1) == "\n") {
+        str = string_copy(str, 0, string_length(str) - 1);
+	  }
+    }
+  }
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
   return str;

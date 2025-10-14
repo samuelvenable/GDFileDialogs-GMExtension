@@ -3,5 +3,7 @@
     {"name":"libgdfiledialogs","order":1,"path":"folders/Fonts/libgdfiledialogs.yy",},
     {"name":"libgdfiledialogs","order":1,"path":"folders/Scripts/libgdfiledialogs.yy",},
   ],
-  "ResourceOrderSettings": [],
+  "ResourceOrderSettings": [
+    {"name":"libfilesystem","order":1,"path":"extensions/libfilesystem/libfilesystem.yy",},
+  ],
 }

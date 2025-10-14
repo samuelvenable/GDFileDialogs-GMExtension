@@ -44,6 +44,7 @@
   },
   "resources": [
     {"id":{"name":"scr_example","path":"scripts/scr_example/scr_example.yy",},},
+    {"id":{"name":"libfilesystem","path":"extensions/libfilesystem/libfilesystem.yy",},},
     {"id":{"name":"rm_example","path":"rooms/rm_example/rm_example.yy",},},
     {"id":{"name":"fnt_example","path":"fonts/fnt_example/fnt_example.yy",},},
     {"id":{"name":"obj_example","path":"objects/obj_example/obj_example.yy",},},
