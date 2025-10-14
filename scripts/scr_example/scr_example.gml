@@ -38,7 +38,7 @@ if (os_type == os_macosx) {
   FreeExecutedProcessStandardInput(global.gdpid);
   FreeExecutedProcessStandardOutput(global.gdpid);
 }
-global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\" 2> /dev/null" : ".x86_64\" 2> /dev/null"));
+global.gdexe = "\"" + working_directory + "gdfiledialogs" + ((os_type == os_windows) ? ".exe\"" : ((os_type == os_macosx) ? "\"" : ".x86_64\""));
 function GdOpenFile(Filter, Width = display_get_width() * 0.5, Height = display_get_height() * 0.5) {
   global.gdpid = ProcessExecuteAsync(global.gdexe + " --open-file \"" + string(Filter) + "\" " + string(Width) + " " + string(Height));
   return global.gdpid;
